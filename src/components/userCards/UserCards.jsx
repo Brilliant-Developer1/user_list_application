@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 const UserCards = ({ users }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [searchValue, setSearchValue] = useState('');
+  const [sortOption, setSortOption] = useState('');
 
   useEffect(() => {
     // Simulate loading for 0.2 seconds
@@ -16,15 +17,24 @@ const UserCards = ({ users }) => {
     // Cleanup function to clear the timeout
     return () => clearTimeout(timeout);
   }, []);
-  const handleSearch = e => {
-    e.preventDefault();
 
-    setSearchValue('');
+  // Sort users based on selected option
+  const sortUsers = option => {
+    if (option === 'option1') {
+      return [...users].sort((a, b) => (a.firstName > b.firstName ? 1 : -1));
+    } else if (option === 'option2') {
+      return [...users].sort((a, b) => (a.email > b.email ? 1 : -1));
+    } else if (option === 'option3') {
+      return [...users].sort((a, b) =>
+        a.company.name > b.company.name ? 1 : -1
+      );
+    } else {
+      return users;
+    }
   };
 
-  // Filter users by search value
-  // eslint-disable-next-line react/prop-types
-  const filterUsers = users.filter(user =>
+  // Sort and filter users
+  const sortedUsers = sortUsers(sortOption).filter(user =>
     `${user.firstName} ${user.lastName}`
       .toLowerCase()
       .includes(searchValue.toLowerCase())
@@ -39,40 +49,68 @@ const UserCards = ({ users }) => {
   }
 
   return (
-    <div className="  flex   max-w-[1760px] justify-center items-center h-auto  ">
-      <div className="flex justify-center items-center flex-col m-10 shadow-2xl rounded-3xl">
-        <div className=" w-full mx-auto  p-5 flex justify-between items-center">
-          <p>SORT FUNCTIONS</p>
-          <div>
-            <div>
-              <form className="flex gap-2 " action="" onSubmit={handleSearch}>
+    <div className="  flex   max-w-[1760px] justify-center items-center h-auto p-5 ">
+      <div className="flex justify-center items-center flex-col  shadow-2xl rounded-3xl border-4">
+        <div className="sticky top-0 z-10 rounded-3xl bg-white w-full">
+          <div className="  border-b-4 w-full mx-auto  p-5 flex justify-around items-center gap-3 sm:gap-1 flex-col sm:flex-row">
+            <div className="flex-1 w-full flex justify-center">
+              <select
+                value={sortOption}
+                onChange={e => setSortOption(e.target.value)}
+                className="select select-accent  w-full max-w-lg bg-transparent"
+              >
+                <option value="">Sort options</option>
+                <option value="option1">Sort by name</option>
+                <option value="option2">Sort by email</option>
+                <option value="option3">Sort by Company name</option>
+              </select>
+            </div>
+            <div className="flex flex-1 justify-center gap-2 w-full">
+              <form className="flex-1">
                 <input
                   type="text"
                   required
                   onChange={e => setSearchValue(e.target.value)}
                   placeholder="Search Names"
-                  className="input input-bordered input-accent w-full  bg-transparent"
+                  className="input input-bordered input-accent   bg-transparent w-full sm:max-w-96"
                 />
-                <button type="submit" className="btn btn-outline btn-accent">
-                  Search
-                </button>
               </form>
+
+              <button
+                className="flex-1 btn btn-outline btn-accent"
+                onClick={() =>
+                  document.getElementById('my_modal_2').showModal()
+                }
+              >
+                open modal
+              </button>
+              <dialog id="my_modal_2" className="modal">
+                <div className="modal-box">
+                  <h3 className="font-bold text-lg">Hello!</h3>
+                  <p className="py-4">
+                    Press ESC key or click outside to close
+                  </p>
+                </div>
+                <form method="dialog" className="modal-backdrop">
+                  <button>close</button>
+                </form>
+              </dialog>
             </div>
           </div>
         </div>
         <div className="   flex flex-wrap gap-6 p-5 justify-center text-2xl ">
           {
             // eslint-disable-next-line react/prop-types
-            filterUsers.map(user => (
+            sortedUsers.map(user => (
               <Link key={user.id} to={`/userDetailsCard/${user.id}`}>
-                <div className=" card w-72 sm:w-96 bg-zinc-300 hover:shadow-2xl shadow-lg">
-                  <div className=" avatar p-5 m-5  justify-center">
+                <div className=" text-center card w-72 sm:w-96 bg-zinc-300 hover:shadow-2xl shadow-lg">
+                  <div className=" avatar p-5 m-5 mb-0  justify-center">
                     <div className=" max-w-full p-5 border-2 border-black rounded">
                       <img src={user.image} alt="user Image" />
                     </div>
                   </div>
 
-                  <div className="card-body pt-0 text-black">
+                  <div className="card-body p-2 sm:p-5 text-black">
                     <p className="card-title text-base justify-center">
                       {user.firstName} {user.lastName}
                     </p>
