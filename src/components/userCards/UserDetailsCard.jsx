@@ -9,17 +9,11 @@ const UserDetailsCard = () => {
   useEffect(() => {
     const fetchUserDetails = async () => {
       try {
-        // Fetch all user data from the API
+        // Fetch user data
         const response = await fetch(`https://dummyjson.com/users`);
         const apiUserData = await response.json();
 
-        // Check if apiUserData is an object
-        if (!Array.isArray(apiUserData.users)) {
-          console.error('API data is not an array:', apiUserData.users);
-          return;
-        }
-
-        // Retrieve user data from local storage
+        // user data from local storage
         const localStorageUserData =
           JSON.parse(localStorage.getItem('users')) || [];
 
@@ -61,51 +55,46 @@ const UserDetailsCard = () => {
     fetchUserDetails();
   }, [userId]);
 
-  if (!user) {
-    return (
-      <div className="bg-blur flex-col text-black max-w-full flex justify-center items-center h-screen ">
-        <div className="loader"></div>
-        <p className="p-5">Wait!</p>
-      </div>
-    );
-  }
-
   return (
     <>
       {!user ? (
         <LoadingScreen></LoadingScreen>
       ) : (
-        <div className="bg-blur  flex flex-col justify-center items-center h-auto sm:h-screen">
-          <div className="flex  md:flex-row flex-col items-center h-auto m-3 p-5  bg-cyan-100 rounded-2xl">
-            <div className=" max-w-96 flex justify-center flex-1 p-5 border border-black rounded">
+        // User Details Card Start
+        <div className="bg-blur flex flex-col justify-center items-center min-h-screen p-2">
+          <div className="flex md:flex-row flex-col items-center w-full max-w-screen-lg m-3 p-5 bg-cyan-100 rounded-2xl">
+            <div className="w-full max-w-96 flex justify-center p-5 border border-black rounded">
               <img src={user.image} alt="profile Image" />
             </div>
-            <div className="flex flex-col items-end">
-              <div className="p-5 flex flex-col  items-center justify-around">
-                <h1 className="text-5xl md:text-7xl sm:text-6xl text-center ">
+            <div className="flex flex-col items-center justify-around w-full">
+              {/* User Name and details start */}
+              <div className="p-5 flex flex-col w-full items-center justify-around">
+                <h1 className="text-5xl text-slate-700 md:text-7xl sm:text-6xl text-center mb-4">
                   {user.firstName} {user.lastName}
                 </h1>
-                <div className="text-black mt-4">
-                  <p className="card-title text-base justify-center">
+                <div className="text-slate-600">
+                  <p className="card-title text-base justify-center mb-2">
                     Email: <span className="font-normal">{user.email}</span>
                   </p>
-                  <div className="flex  flex-col items-center ">
+                  <div className="flex flex-col items-center mb-2">
                     <p className="card-title justify-center text-base items-start">
                       Address:{' '}
                     </p>
-                    <span className=" text-base">
+                    <span className="text-base">
                       {user.address.address}, {user.address.city}
                     </span>
                   </div>
-                  <div className="flex  flex-col items-center ">
+                  <div className="flex flex-col items-center mb-2">
                     <p className="card-title justify-center text-base items-start">
                       Company Name:{' '}
                     </p>
-                    <span className=" text-base">{user.company.name}</span>
+                    <span className="text-base">{user.company.name}</span>
                   </div>
                 </div>
               </div>
-              <div className="">
+              {/* User Name and details End */}
+              {/* Back Button to Home */}
+              <div className="mb-4 sm:mb-0">
                 <Link to={'/'}>
                   <button className="btn btn-square">
                     <svg
@@ -128,8 +117,9 @@ const UserDetailsCard = () => {
               </div>
             </div>
           </div>
-          <div className=" block sm:hidden" style={{ height: 290 }}></div>
         </div>
+
+        // User Details Card End
       )}
     </>
   );

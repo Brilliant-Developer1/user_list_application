@@ -3,7 +3,7 @@ import './Home.css';
 
 const Home = () => {
   return (
-    <div className="bg-blur  flex justify-center items-center h-auto">
+    <div className="bg-blur   min-h-screen">
       <UserData></UserData>
     </div>
   );
