@@ -1,6 +1,10 @@
 # User List Application
 
-This is a simple user list application built using React, Tailwind CSS, and React Router DOM. It allows users to view a list of users and navigate through different routes.
+This is a simple user list application built using React, Tailwind CSS, and React Router DOM. It allows users to view a list of users by different types of filters and navigate through different routes.
+
+## Live website Invoriem-frontEnd
+
+https://deluxe-mooncake-bd184c.netlify.app/
 
 ## Getting Started
 
@@ -14,14 +18,12 @@ Make sure you have Node.js installed on your machine.
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/your_username/user_list_application.git
+   git clone https://github.com/Brilliant-Developer1/user_list_application
    ```
 2. Install NPM packages
    ```sh
    npm install
    ```
-
-## Usage
 
 ### Development Server
 
@@ -42,26 +44,6 @@ npm run build
 ```
 
 This will generate a production-ready build of your application in the `dist` directory.
-
-### Linting
-
-To lint your code, run:
-
-```sh
-npm run lint
-```
-
-This will run ESLint with the configured rules on your project.
-
-### Previewing Production Build
-
-To preview the production build locally, run:
-
-```sh
-npm run preview
-```
-
-This will serve the production build locally, allowing you to test it before deployment.
 
 ## Dependencies
 
