@@ -2,7 +2,7 @@
 
 This is a simple user list application built using React, Tailwind CSS, and React Router DOM. It allows users to view a list of users by different types of filters and navigate through different routes.
 
-## Live website Invoriem-frontEnd
+## Live website
 
 https://deluxe-mooncake-bd184c.netlify.app/
 
