@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import LoadingScreen from '../LoadingScreen/LoadingScreen';
 import AddUser from '../AddUser/AddUser';
 import SortFilterUsers from '../SortFilterUsers/SortFilterUsers';
+import banner from '../../assets/banner.png';
 
 // eslint-disable-next-line react/prop-types
 const UserCards = ({ users }) => {
@@ -74,57 +75,56 @@ const UserCards = ({ users }) => {
       ) : (
         // Loading Screen End
         // Cards body Start
-        <div className="  flex justify-center items-center w-full  sm:p-5 p-1 ">
-          <div className="flex justify-center items-center flex-col w-full max-w-[1760px] h-full shadow-2xl">
+        <div className="  flex flex-col justify-center items-center  ">
+          <div>
+            <img className="rounded-b-lg" src={banner} alt="Banner" />
+          </div>
+          <div className="flex justify-center items-center flex-col ">
             {/* Sort and Search bar Start */}
-            <div className=" static sm:sticky top-0 z-10 rounded-t-2xl bg-white w-full">
-              <div className="  border-4 rounded-t-2xl   p-5 flex justify-around items-center gap-3 sm:gap-1 flex-col md:flex-row">
-                {/* Sort Option Start */}
-                <SortFilterUsers
-                  setSortOption={setSortOption}
-                  sortOption={sortOption}
-                ></SortFilterUsers>
-                {/* Sort Option End */}
-                {/* Search And Add User Form Start */}
-                <div className="flex flex-1 flex-col sm:flex-row justify-center gap-2 w-full">
-                  <form className="flex-1">
-                    <input
-                      type="text"
-                      required
-                      onChange={e => setSearchValue(e.target.value)}
-                      placeholder="Search Names"
-                      className="input input-bordered input-accent   bg-transparent w-full sm:max-w-96"
-                    />
-                  </form>
-                  {/* Add User Start */}
-                  <div className="flex-1 ">
-                    <button
-                      className=" btn w-full btn-outline btn-accent"
-                      onClick={() =>
-                        document.getElementById('my_modal_2').showModal()
-                      }
-                    >
-                      Add User
-                    </button>
-                    <AddUser></AddUser>
-                  </div>
-                  {/* Add User End */}
+            <div className="static sm:sticky bg-white top-0 z-10  p-8 w-full flex justify-around  items-center gap-3 sm:gap-1 flex-col lg:flex-row ">
+              {/* Sort Option Start */}
+              <SortFilterUsers
+                setSortOption={setSortOption}
+                sortOption={sortOption}
+              ></SortFilterUsers>
+              {/* Sort Option End */}
+              {/* Search And Add User Form Start */}
+              <div className="flex flex-col w-full sm:flex-row justify-end gap-2 ">
+                <form className="flex-1 flex justify-end">
+                  <input
+                    type="text"
+                    required
+                    onChange={e => setSearchValue(e.target.value)}
+                    placeholder="Search Names"
+                    className="input input-bordered w-full max-w-none md:max-w-lg input-accent bg-transparent  "
+                  />
+                </form>
+                {/* Add User Start */}
+                <div className=" ">
+                  <button
+                    className=" btn w-full sm:w-auto btn-outline btn-accent"
+                    onClick={() =>
+                      document.getElementById('my_modal_2').showModal()
+                    }
+                  >
+                    Add User
+                  </button>
+                  <AddUser></AddUser>
                 </div>
-                {/* Search And Add User Form End */}
+                {/* Add User End */}
               </div>
+              {/* Search And Add User Form End */}
             </div>
             {/* Sort and Search bar End */}
             {/* Cards Grid Start */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 justify-items-center  w-full p-1  sm:p-5 text-2xl ">
+            <div className="grid grid-cols-1  lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-3 justify-items-center  w-full  text-2xl bg-emerald-100 p-10 rounded-xl">
               {
                 // eslint-disable-next-line react/prop-types
                 sortedUsers.map(user => (
                   <Link key={user.id} to={`/userDetailsCard/${user.id}`}>
-                    <div className=" text-center card max-w-96  sm:w-screen bg-white hover:shadow-2xl shadow-lg">
-                      <div className=" avatar  w-full  border-b-2 border-gray-300  justify-center">
-                        <div className=" w-full rounded-t-2xl  ">
-                          <img src={user.image} alt="user Image" />
-                        </div>
+                    <div className=" text-center card max-w-96  bg-white hover:shadow-2xl shadow-lg">
+                      <div className=" avatar p-5 w-full border-b-2 border-gray-300  justify-center">
+                        <img src={user.image} alt="user Image" />
                       </div>
 
                       <div className="card-body p-2 sm:p-3 text-slate-600 h-auto sm:h-60">

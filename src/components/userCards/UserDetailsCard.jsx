@@ -95,7 +95,7 @@ const UserDetailsCard = () => {
               {/* User Name and details End */}
               {/* Back Button to Home */}
               <div className="mb-4 sm:mb-0">
-                <Link to={'/'}>
+                <Link to={'/users'}>
                   <button className="btn btn-square">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"

@@ -18,7 +18,7 @@ const UserData = () => {
   }, []);
 
   return (
-    <div className="w-full">
+    <div className="container">
       <UserCards users={users}></UserCards>
     </div>
   );

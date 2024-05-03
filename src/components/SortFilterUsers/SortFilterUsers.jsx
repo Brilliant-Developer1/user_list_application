@@ -1,7 +1,7 @@
 // eslint-disable-next-line react/prop-types
 const SortFilterUsers = ({ setSortOption, sortOption }) => {
   return (
-    <div className="flex-1 w-full flex justify-center">
+    <div className=" w-full ">
       <select
         value={sortOption}
         onChange={e => setSortOption(e.target.value)}

@@ -56,4 +56,4 @@ This will generate a production-ready build of your application in the `dist` di
 
 ## Contact
 
-Md Obaidullah
+For any inquiries or support, contact [Obaidullah](mailto:email2obaidul@gmail.com).
