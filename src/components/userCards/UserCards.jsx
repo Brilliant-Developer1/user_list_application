@@ -13,10 +13,10 @@ const UserCards = ({ users }) => {
   const [sortOption, setSortOption] = useState('');
 
   useEffect(() => {
-    // loading for 0.2 sec
+    // loading for 0.8 sec
     const timeout = setTimeout(() => {
       setIsLoading(false);
-    }, 500);
+    }, 800);
 
     return () => clearTimeout(timeout);
   }, []);
@@ -74,8 +74,8 @@ const UserCards = ({ users }) => {
         <LoadingScreen></LoadingScreen>
       ) : (
         // Loading Screen End
-        // Cards body Start
-        <div className="  flex flex-col justify-center items-center  ">
+        // Cards Container Start
+        <div className="mb-20 sm:mb-2  flex flex-col justify-center items-center  ">
           <div>
             <img className="rounded-b-lg" src={banner} alt="Banner" />
           </div>
@@ -117,14 +117,14 @@ const UserCards = ({ users }) => {
             </div>
             {/* Sort and Search bar End */}
             {/* Cards Grid Start */}
-            <div className="grid grid-cols-1  lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-3 justify-items-center  w-full  text-2xl bg-emerald-100 p-10 rounded-xl">
+            <div className="grid grid-cols-1  lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-3 justify-items-center  w-full  text-2xl bg-emerald-100 p-10 rounded-xl ">
               {
                 // eslint-disable-next-line react/prop-types
                 sortedUsers.map(user => (
                   <Link key={user.id} to={`/userDetailsCard/${user.id}`}>
-                    <div className=" text-center card max-w-96  bg-white hover:shadow-2xl shadow-lg">
-                      <div className=" avatar p-5 w-full border-b-2 border-gray-300  justify-center">
-                        <img src={user.image} alt="user Image" />
+                    <div className=" text-center card  card_body hover:shadow-2xl shadow-lg transition ease-in-out duration-300 max-w-[300px] min-h-full">
+                      <div className=" avatar p-5 min-h-[300px]  border-b-2 border-gray-300  justify-center items-center">
+                        <img className="" src={user.image} alt="user Image" />
                       </div>
 
                       <div className="card-body p-2 sm:p-3 text-slate-600 h-auto sm:h-60">
@@ -165,7 +165,7 @@ const UserCards = ({ users }) => {
             {/* Cards Grid End */}
           </div>
         </div>
-        // Cards body End
+        // Cards Container End
       )}
     </>
   );

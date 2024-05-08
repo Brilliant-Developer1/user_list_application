@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import './AddUser.css';
 
 const AddUser = () => {
   //   console.log(props);
@@ -60,19 +61,19 @@ const AddUser = () => {
   return (
     <div>
       <dialog id="my_modal_2" className="modal">
-        <div className="modal-box">
+        <div className="modal-box bg-white modal_style text-black">
           <h3 className="font-bold text-lg">Add New User</h3>
-          <form onSubmit={handleAddUser} className="  py-4">
-            <label className="form-control w-full max-w-2xl">
-              <div className="label">
-                <span className="label-text">Name?</span>
+          <form onSubmit={handleAddUser} className="  py-4 ">
+            <label className="form-control w-full max-w-2xl ">
+              <div className="label ">
+                <span className="label-text text-black">Name?</span>
               </div>
               <div className="flex gap-1">
                 <input
                   type="text"
                   placeholder="Fist Name"
                   value={newUserData ? newUserData.firstName : ''}
-                  className="input input-bordered input-accent   bg-transparent w-full "
+                  className="input input-bordered input-accent focus:outline-none bg-transparent w-full "
                   onChange={e =>
                     setNewUserData({
                       ...newUserData,
@@ -84,7 +85,7 @@ const AddUser = () => {
                   type="text"
                   placeholder="Last Name"
                   value={newUserData ? newUserData.lastName : ''}
-                  className="input input-bordered input-accent   bg-transparent w-full "
+                  className="input input-bordered input-accent focus:outline-none  bg-transparent w-full "
                   onChange={e =>
                     setNewUserData({
                       ...newUserData,
@@ -96,13 +97,13 @@ const AddUser = () => {
             </label>
             <label className="form-control w-full max-w-2xl">
               <div className="label">
-                <span className="label-text">Email?</span>
+                <span className="label-text text-black">Email?</span>
               </div>
               <input
                 type="email"
                 placeholder="Email"
                 value={newUserData ? newUserData.email : ''}
-                className="input input-bordered input-accent   bg-transparent w-full "
+                className="input input-bordered input-accent  focus:outline-none bg-transparent w-full "
                 onChange={e =>
                   setNewUserData({
                     ...newUserData,
@@ -113,14 +114,14 @@ const AddUser = () => {
             </label>
             <label className="form-control w-full max-w-2xl">
               <div className="label">
-                <span className="label-text">Address?</span>
+                <span className="label-text text-black">Address?</span>
               </div>
               <div className="flex gap-1">
                 <input
                   type="text"
                   placeholder="Street & Suite"
                   value={newUserData ? newUserData.address.address : ''}
-                  className="input input-bordered input-accent   bg-transparent w-full sm:max-w-96 "
+                  className="input input-bordered input-accent focus:outline-none  bg-transparent w-full sm:max-w-96 "
                   onChange={e =>
                     setNewUserData(prevState => ({
                       ...prevState,
@@ -135,7 +136,7 @@ const AddUser = () => {
                   type="text"
                   placeholder="City"
                   value={newUserData ? newUserData.address.city : ''}
-                  className="input input-bordered input-accent   bg-transparent w-full sm:max-w-96"
+                  className="input input-bordered input-accent  focus:outline-none bg-transparent w-full sm:max-w-96"
                   onChange={e =>
                     setNewUserData(prevState => ({
                       ...prevState,
@@ -150,13 +151,13 @@ const AddUser = () => {
             </label>
             <label className="form-control w-full max-w-2xl">
               <div className="label">
-                <span className="label-text">Company Name?</span>
+                <span className="label-text text-black">Company Name?</span>
               </div>
               <input
                 type="text"
                 placeholder="Company Name"
                 value={newUserData ? newUserData.companyName : ''}
-                className="input input-bordered input-accent   bg-transparent w-full "
+                className="input input-bordered input-accent focus:outline-none  bg-transparent w-full "
                 onChange={e =>
                   setNewUserData({
                     ...newUserData,
@@ -167,11 +168,11 @@ const AddUser = () => {
             </label>
             <label className="form-control w-full max-w-2xl">
               <div className="label">
-                <span className="label-text">Upload Image</span>
+                <span className="label-text text-black">Upload Image</span>
               </div>
               <input
                 type="file"
-                className="file-input file-input-bordered file-input-accent bg-transparent w-full"
+                className="file-input file-input-bordered file-input-accent bg-transparent w-full focus:outline-none"
                 onChange={e =>
                   setNewUserData({
                     ...newUserData,

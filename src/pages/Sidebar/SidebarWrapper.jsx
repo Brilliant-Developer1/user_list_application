@@ -88,8 +88,9 @@ export function SidebarItem({ icon, text, active, alert, link, onClick }) {
   };
 
   return (
-    <li
-      className={`
+    <Link to={link}>
+      <li
+        className={`
         relative py-2 sm:py-4 px-3 my-1 sm:my-2
         font-medium rounded-md cursor-pointer
         transition-colors group
@@ -99,45 +100,39 @@ export function SidebarItem({ icon, text, active, alert, link, onClick }) {
             : 'hover:bg-indigo-50 text-gray-600'
         }
     `}
-      onClick={handleClick}
-    >
-      <Link to={link} className="flex items-center flex-col sm:flex-row">
-        {icon}
-        <span
-          className={`overflow-hidden transition-all ${
-            expanded ? 'w-52 ml-3' : 'w-0 hidden'
-          }`}
-        >
-          {text}
-        </span>
-        {alert && (
-          <div
-            className={`absolute right-2 w-2 h-2 rounded bg-emerald-400 ${
-              expanded ? '' : 'top-2'
+        onClick={handleClick}
+      >
+        <div className="flex items-center flex-col sm:flex-row">
+          {icon}
+          <span
+            className={`overflow-hidden transition-all ${
+              expanded ? 'w-52 ml-3' : 'w-0 hidden'
             }`}
-          />
-        )}
+          >
+            {text}
+          </span>
+          {alert && (
+            <div
+              className={`absolute right-2 w-2 h-2 rounded bg-emerald-400 ${
+                expanded ? '' : 'top-2'
+              }`}
+            />
+          )}
 
-        {!expanded && (
-          <div
-            className={`
+          {!expanded && (
+            <div
+              className={`
             rounded-md px-2 pt-1 sm:pt-0 py-0 sm:py-1 ml-0 sm:ml-6 sm:absolute sm:left-full sm:bg-indigo-100
              text-emerald-800 text-sm 
              sm:invisible sm:opacity-20 sm:-translate-x-3 sm:transition-all
              sm:group-hover:visible sm:group-hover:opacity-100 sm:group-hover:translate-x-0
       `}
-          >
-            {text}
-          </div>
-        )}
-      </Link>
-    </li>
+            >
+              {text}
+            </div>
+          )}
+        </div>
+      </li>
+    </Link>
   );
 }
-
-/* 
-absolute left-full rounded-md px-2 py-1 ml-6
-          bg-indigo-100 text-indigo-800 text-sm
-          invisible opacity-20 -translate-x-3 transition-all
-          group-hover:visible group-hover:opacity-100 group-hover:translate-x-0
-*/

@@ -8,7 +8,7 @@ import UserData from './components/userCards/UserData';
 function App() {
   return (
     <Router>
-      <div className="flex flex-col sm:flex-row ">
+      <header className="flex flex-col sm:flex-row ">
         <Sidebar />
         <div className="flex-1 ">
           <Routes>
@@ -20,7 +20,7 @@ function App() {
             />
           </Routes>
         </div>
-      </div>
+      </header>
     </Router>
   );
 }
