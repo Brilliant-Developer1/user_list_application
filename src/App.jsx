@@ -3,7 +3,8 @@ import './App.css';
 import Sidebar from './pages/Sidebar/Sidebar';
 import Dashboard from './components/Dashboard/Dashboard';
 import UserDetailsCard from './components/userCards/UserDetailsCard';
-import UserData from './components/userCards/UserData';
+
+import UserCards from './components/userCards/UserCards';
 
 function App() {
   return (
@@ -13,7 +14,7 @@ function App() {
         <div className="flex-1 ">
           <Routes>
             <Route path="/" element={<Dashboard />} />
-            <Route path="/users" element={<UserData />} />
+            <Route path="/users" element={<UserCards />} />
             <Route
               path="/userDetailsCard/:userId"
               element={<UserDetailsCard />}

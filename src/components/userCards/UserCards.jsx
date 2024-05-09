@@ -5,12 +5,14 @@ import LoadingScreen from '../LoadingScreen/LoadingScreen';
 import AddUser from '../AddUser/AddUser';
 import SortFilterUsers from '../SortFilterUsers/SortFilterUsers';
 import banner from '../../assets/banner.png';
+import getAllUsers from '../../data/getAllUsers';
 
 // eslint-disable-next-line react/prop-types
-const UserCards = ({ users }) => {
+const UserCards = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [searchValue, setSearchValue] = useState('');
   const [sortOption, setSortOption] = useState('');
+  const [users, setUsers] = useState([]);
 
   useEffect(() => {
     // loading for 0.8 sec
@@ -21,42 +23,33 @@ const UserCards = ({ users }) => {
     return () => clearTimeout(timeout);
   }, []);
 
-  // Saved local storage users
-  const existingUsers = JSON.parse(localStorage.getItem('users')) || [];
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const fetchedUsers = await getAllUsers();
+        setUsers(fetchedUsers);
+        setIsLoading(false);
+      } catch (error) {
+        console.error('Error fetching users:', error);
+        setIsLoading(false);
+      }
+    };
 
-  const mergeUsers = existingUsers.map(user => ({
-    id: user.id,
-    firstName: user.firstName,
-    lastName: user.lastName,
-    email: user.email,
-    companyName: user.companyName,
-    image: user.image,
-    address: {
-      address: user.address?.address || '',
-      city: user.address?.city || '',
-    },
-    company: {
-      name: user.companyName || '',
-      department: '',
-      title: '',
-    },
-  }));
-  const mergedUsers = [...users, ...mergeUsers];
+    fetchData();
+  }, []);
 
   // Sort users
   const sortUsers = option => {
     if (option === 'option1') {
-      return [...mergedUsers].sort((a, b) =>
-        a.firstName > b.firstName ? 1 : -1
-      );
+      return [...users].sort((a, b) => (a.firstName > b.firstName ? 1 : -1));
     } else if (option === 'option2') {
-      return [...mergedUsers].sort((a, b) => (a.email > b.email ? 1 : -1));
+      return [...users].sort((a, b) => (a.email > b.email ? 1 : -1));
     } else if (option === 'option3') {
-      return [...mergedUsers].sort((a, b) =>
+      return [...users].sort((a, b) =>
         a.company.name > b.company.name ? 1 : -1
       );
     } else {
-      return mergedUsers;
+      return users;
     }
   };
 
@@ -68,7 +61,7 @@ const UserCards = ({ users }) => {
   );
 
   return (
-    <>
+    <section className="container">
       {isLoading ? (
         // Loading Screen Start
         <LoadingScreen></LoadingScreen>
@@ -117,14 +110,18 @@ const UserCards = ({ users }) => {
             </div>
             {/* Sort and Search bar End */}
             {/* Cards Grid Start */}
-            <div className="grid grid-cols-1  lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-3 justify-items-center  w-full  text-2xl bg-emerald-100 p-10 rounded-xl ">
+            <div className="grid grid-cols-1  lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-3 justify-items-center  w-full  text-2xl bg-emerald-100/60 p-10 rounded-xl ">
               {
                 // eslint-disable-next-line react/prop-types
                 sortedUsers.map(user => (
                   <Link key={user.id} to={`/userDetailsCard/${user.id}`}>
                     <div className=" text-center card  card_body hover:shadow-2xl shadow-lg transition ease-in-out duration-300 max-w-[300px] min-h-full">
                       <div className=" avatar p-5 min-h-[300px]  border-b-2 border-gray-300  justify-center items-center">
-                        <img className="" src={user.image} alt="user Image" />
+                        <img
+                          className="max-h-[258px] object-top"
+                          src={user.image}
+                          alt="user Image"
+                        />
                       </div>
 
                       <div className="card-body p-2 sm:p-3 text-slate-600 h-auto sm:h-60">
@@ -167,7 +164,7 @@ const UserCards = ({ users }) => {
         </div>
         // Cards Container End
       )}
-    </>
+    </section>
   );
 };
 
